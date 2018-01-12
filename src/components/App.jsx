@@ -13,6 +13,11 @@ class App extends Component {
   addReminder(){
     this.props.addReminder(this.state.text);
   }
+
+  renderReminders(){
+    const { reminders } = this.props;
+  }
+
   render(){
     return(
       <div className="App">
@@ -26,6 +31,7 @@ class App extends Component {
               placeholder="I have to..."
               onChange={event => this.setState({text: event.target.value})}
             />
+            { this.renderReminders() }
           </div>
           <button
             type="button"
@@ -40,4 +46,11 @@ class App extends Component {
   }
 }
 
-export default connect(null, {addReminder})(App);
+function mapStateToProps(state){
+  return {
+    reminders : state
+  }
+}
+
+
+export default connect(mapStateToProps, {addReminder})(App);
